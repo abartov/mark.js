@@ -338,6 +338,15 @@ class RegExpCreator {
         return true;
       });
     });
+    // Add support for Hebrew diacritics (nikud)
+    // Hebrew letters: U+0590-U+05FF, Hebrew diacritics: U+0591-U+05C7
+    str = str.replace(/([\u0590-\u05FF])/g, '$1[\\u0591-\\u05C7]*');
+    // Add support for Arabic diacritics (harakat)
+    // Arabic letters: U+0600-U+06FF, Arabic diacritics include:
+    // U+064B-U+065F, U+0670, U+06D6-U+06ED
+    str = str.replace(
+      /([\u0600-\u06FF])/g, '$1[\\u064B-\\u065F\\u0670\\u06D6-\\u06ED]*'
+    );
     return str;
   }
 

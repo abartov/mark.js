@@ -448,6 +448,10 @@
           return true;
         });
       });
+      str = str.replace(/([\u0590-\u05FF])/g, '$1[\\u0591-\\u05C7]*');
+      str = str.replace(
+        /([\u0600-\u06FF])/g, '$1[\\u064B-\\u065F\\u0670\\u06D6-\\u06ED]*'
+      );
       return str;
     }
     createMergedBlanksRegExp(str) {
