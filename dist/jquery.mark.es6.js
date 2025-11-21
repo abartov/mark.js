@@ -1,7 +1,7 @@
 /*!***************************************************
 * mark.js v9.0.0
 * https://markjs.io/
-* Copyright (c) 2014–2018, Julian Kühnel
+* Copyright (c) 2014–2025, Julian Kühnel
 * Released under the MIT license https://git.io/vwTVl
 *****************************************************/
 
@@ -729,7 +729,7 @@
             (match = regex.exec(node.textContent)) !== null &&
             match[matchIdx] !== ''
           ) {
-            if (this.opt.separateGroups) {
+            if (this.opt.separateGroups && match.length !== 1){
               node = this.separateGroups(
                 node,
                 match,
