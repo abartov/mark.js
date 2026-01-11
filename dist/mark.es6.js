@@ -1,7 +1,7 @@
 /*!***************************************************
 * mark.js v9.0.0
 * https://markjs.io/
-* Copyright (c) 2014–2018, Julian Kühnel
+* Copyright (c) 2014–2025, Julian Kühnel
 * Released under the MIT license https://git.io/vwTVl
 *****************************************************/
 
@@ -448,6 +448,10 @@
           return true;
         });
       });
+      str = str.replace(/([\u0590-\u05FF])/g, '$1[\\u0591-\\u05C7]*');
+      str = str.replace(
+        /([\u0600-\u06FF])/g, '$1[\\u064B-\\u065F\\u0670\\u06D6-\\u06ED]*'
+      );
       return str;
     }
     createMergedBlanksRegExp(str) {
@@ -727,7 +731,7 @@
             (match = regex.exec(node.textContent)) !== null &&
             match[matchIdx] !== ''
           ) {
-            if (this.opt.separateGroups) {
+            if (this.opt.separateGroups && match.length !== 1){
               node = this.separateGroups(
                 node,
                 match,
