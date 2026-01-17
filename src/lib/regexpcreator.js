@@ -338,6 +338,23 @@ class RegExpCreator {
         return true;
       });
     });
+
+    // Handle Hebrew diacritics (nikkud)
+    // Hebrew letters: \u05D0-\u05EA
+    // Hebrew diacritics: \u0591-\u05C7
+    str = str.replace(
+      /([\u05D0-\u05EA])/g,
+      '$1[\u0591-\u05C7]*'
+    );
+
+    // Handle Arabic diacritics (harakat/tashkeel)
+    // Arabic letters: \u0600-\u06FF
+    // Arabic diacritics: \u064B-\u065F\u0670\u06D6-\u06ED
+    str = str.replace(
+      /([\u0600-\u064A\u0660-\u066D\u066E-\u06D3\u06D5\u06EE-\u06FF])/g,
+      '$1[\u064B-\u065F\u0670\u06D6-\u06ED]*'
+    );
+
     return str;
   }
 
